@@ -1,0 +1,9 @@
+@font-face { font-family: "Benton Modern"; src: url("../assets/fonts/benton-light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Benton Modern"; src: url("../assets/fonts/benton-light-italic.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Benton Modern"; src: url("../assets/fonts/benton-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Benton Modern"; src: url("../assets/fonts/benton-regular-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Noto Serif JP"; src: url("../assets/fonts/notoserifjp-light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Noto Serif JP"; src: url("../assets/fonts/notoserifjp-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Noto Serif JP"; src: url("../assets/fonts/notoserifjp-medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Noto Sans Devanagari"; src: url("../assets/fonts/notosansdevanagari-light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Noto Sans Devanagari"; src: url("../assets/fonts/notosansdevanagari-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
