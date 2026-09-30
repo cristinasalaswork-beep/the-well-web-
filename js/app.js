@@ -208,8 +208,9 @@
     } else {
       var url = cfg.whatsapp + "?text=" + encodeURIComponent(T().waTexto(data));
       wa.href = url;
-      window.open(url, "_blank", "noopener");
-      msg.textContent = T().waAbierto;
+      var w = window.open(url, "_blank");
+      if (w) { w.opener = null; msg.textContent = T().waAbierto; }
+      else { msg.textContent = T().waManual; wa.focus(); }
     }
   });
 

@@ -61,6 +61,7 @@ window.WELL = {
       ok: "Gracias. Te contactaremos muy pronto.",
       error: "No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.",
       waAbierto: "Abrimos WhatsApp con tu mensaje listo. Envíalo para completar tu solicitud.",
+      waManual: "Tus datos están listos. Usa el enlace \"O escríbenos por WhatsApp\" para enviarlos.",
       waTexto: function (d) {
         return "Hola, soy " + d.nombre + " " + d.apellido + ". Me interesa " + d.tipo + " en The Well Panamá. Contacto: " + d.correo + ", " + d.telefono +
                " (preferencia: " + d.preferencia + "). País: " + d.pais + ". Nos conocí por: " + d.origen + ".";
@@ -83,6 +84,7 @@ window.WELL = {
       ok: "Thank you. We will contact you very soon.",
       error: "We could not send your request. Please try again or write to us on WhatsApp.",
       waAbierto: "We opened WhatsApp with your message ready. Send it to complete your request.",
+      waManual: "Your details are ready. Use the \"Or write to us on WhatsApp\" link to send them.",
       waTexto: function (d) {
         return "Hello, I'm " + d.nombre + " " + d.apellido + ". I'm interested in " + d.tipo + " at The Well Panama. Contact: " + d.correo + ", " + d.telefono +
                " (preference: " + d.preferencia + "). Country: " + d.pais + ". I found you through: " + d.origen + ".";
