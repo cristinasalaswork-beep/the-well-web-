@@ -61,7 +61,7 @@ a:hover > .ul, a:focus-visible > .ul, a.ul:hover, a.ul:focus-visible { backgroun
 .header .logo-negro { position: absolute; left: 0; top: 0; opacity: 0; }
 .header[data-tema="claro"] .logo-blanco { opacity: 0; }
 .header[data-tema="claro"] .logo-negro { opacity: 1; }
-.header__right { display: flex; justify-content: flex-end; }
+.header__right { display: flex; justify-content: flex-end; margin-left: auto; }
 .burger { width: 44px; height: 44px; display: grid; place-content: center; gap: 6px; }
 .burger span { display: block; width: 26px; height: 1px; background: currentColor; }
 
