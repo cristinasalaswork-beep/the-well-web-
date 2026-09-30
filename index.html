@@ -9,6 +9,7 @@
   <link rel="preload" href="assets/fonts/benton-light.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/notoserifjp-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" type="image/webp" href="assets/img/hero-1600.webp" imagesrcset="assets/img/hero-800.webp 800w, assets/img/hero-1600.webp 1600w, assets/img/hero-2400.webp 2400w" imagesizes="100vw" fetchpriority="high">
+  <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/main.css">
@@ -27,7 +28,7 @@
   </div>
 </header>
 
-<div class="overlay" id="menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
+<div class="overlay" id="menu" role="dialog" aria-modal="true" aria-label="Menú" aria-hidden="true" inert>
   <div class="overlay__top"><button class="overlay__close" type="button">Cerrar</button></div>
   <nav class="overlay__nav" aria-label="Secciones">
     <a href="#the-well" data-i18n="nav.thewell">The Well</a>
@@ -52,10 +53,10 @@
       </div>
     </div>
     <nav class="hero__nav" data-tema="claro" aria-label="Accesos rápidos">
-      <a href="#residencias" data-i18n="nav.residencias">Residencias</a>
-      <a href="#amenidades" data-i18n="nav.amenidades">Amenidades</a>
-      <a href="#the-well" data-i18n="nav.thewell">The Well</a>
-      <a href="#ubicacion" data-i18n="nav.ubicacion">Ubicación</a>
+      <a href="#residencias"><span class="ul" data-i18n="nav.residencias">Residencias</span></a>
+      <a href="#amenidades"><span class="ul" data-i18n="nav.amenidades">Amenidades</span></a>
+      <a href="#the-well"><span class="ul" data-i18n="nav.thewell">The Well</span></a>
+      <a href="#ubicacion"><span class="ul" data-i18n="nav.ubicacion">Ubicación</span></a>
     </nav>
   </section>
 
@@ -190,8 +191,8 @@
   <img class="footer__logo" src="assets/img/logo-negro-vertical.webp" width="440" height="351" loading="lazy" alt="The Well Panamá">
   <address class="footer__info" style="font-style: normal">
     <span data-i18n="footer.dir">Calle 56 y Calle 57, Obarrio, entre Av. Ricardo Arango y Calle 50</span>
-    <span><a href="tel:+50763152222">+507 6315-2222</a> / <a href="tel:+5073855555">+507 385-5555</a></span>
-    <a href="https://www.instagram.com/thewellpanama" rel="noopener" target="_blank">@thewellpanama</a>
+    <span><a class="ul" href="tel:+50763152222">+507 6315-2222</a> / <a class="ul" href="tel:+5073855555">+507 385-5555</a></span>
+    <a class="ul" href="https://www.instagram.com/thewellpanama" rel="noopener" target="_blank">@thewellpanama</a>
   </address>
   <!-- [PENDIENTE] Logos de desarrolladores: añadir aquí (se oculta mientras esté vacío). -->
   <div class="footer__devs"></div>

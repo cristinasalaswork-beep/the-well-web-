@@ -28,5 +28,6 @@
   --hairline: 1px solid rgb(47 47 34 / .28);
   --hairline-claro: 1px solid rgb(225 223 216 / .3);
   --tracking: 0.1em;
+  --ease: cubic-bezier(.22, 1, .36, 1);
 }
 @media (max-width: 720px) { :root { --header-h: 64px; } }
