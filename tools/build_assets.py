@@ -78,3 +78,18 @@ def square(im, size, bg=None, pad=0.14):
     return canvas.resize((size, size), Image.LANCZOS)
 square(sym, 64).save(f"{OUT}/favicon.png", optimize=True)
 square(sym, 180, bg=(225, 223, 216, 255)).convert("RGB").save(f"{OUT}/apple-touch-icon.png", optimize=True)
+
+# ---------- Logos de desarrolladores: monocromo --verde-oscuro, recortados ----------
+TINT = (47, 47, 34)
+for n, h in [("living-proptech", 240), ("marjalizo", 240)]:
+    im = Image.open(SRC("logos:desarrolladores:", f"logo-{n}.png")).convert("RGBA")
+    a = im.getchannel("A")
+    if a.getextrema() == (255, 255):  # sin transparencia: el alfa sale de la luminosidad
+        a = Image.eval(im.convert("L"), lambda v: 255 - v)
+    bb = a.point(lambda v: 255 if v > 8 else 0).getbbox()
+    a = a.crop(bb)
+    w = round(a.width * h / a.height)
+    a = a.resize((w, h), Image.LANCZOS)
+    out = Image.new("RGBA", a.size, TINT + (0,)); out.putalpha(a)
+    p = f"{OUT}/img/dev-{n}.webp"; out.save(p, "WEBP", quality=92, method=6, lossless=False)
+    print("dev", n, out.size, os.path.getsize(p) // 1024, "KB")

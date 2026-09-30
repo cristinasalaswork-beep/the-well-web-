@@ -223,7 +223,11 @@ a:hover > .ul, a:focus-visible > .ul, a.ul:hover, a.ul:focus-visible { backgroun
 .footer__info { margin-top: clamp(36px, 5vw, 64px); display: grid; gap: .5rem; font-family: var(--f-ui); font-size: var(--fs-ui); letter-spacing: .08em; text-transform: uppercase; }
 .footer__info a { text-decoration: none; }
 .footer__info a:hover { text-decoration: underline; }
+.footer__devs { margin-top: clamp(32px, 4vw, 52px); display: flex; justify-content: center; align-items: center; gap: clamp(32px, 5vw, 64px); }
 .footer__devs:empty { display: none; }
+.footer__devs .dev { width: auto; }
+.dev--marjalizo { height: clamp(26px, 2.2vw, 34px); }
+.dev--living { height: clamp(32px, 2.8vw, 42px); }
 .footer__legal { margin: clamp(40px, 5vw, 64px) auto 0; max-width: 52em; padding-top: 24px; border-top: var(--hairline); font-size: .78rem; line-height: 1.7; }
 .footer__copy { margin-top: 16px; font-family: var(--f-ui); font-size: .75rem; letter-spacing: .06em; }
 

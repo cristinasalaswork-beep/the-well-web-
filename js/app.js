@@ -232,7 +232,7 @@
   if (heroImg.decode) heroImg.decode().then(startHero, startHero); else startHero();
 
   var GROUPS = [
-    ["reveal", ".intro__text .eyebrow, .intro__text h2, .intro__body > *, .res > .eyebrow, .res > h2, .amen__text .eyebrow, .amen__text h2, .amen__text .lead, .amen__cols > div, .cita, .ubi h2, .contacto h2, .contacto__sub, .form .field, .form__actions, .footer__logo, .footer__info, .footer__legal, .footer__copy, .hero__nav"],
+    ["reveal", ".intro__text .eyebrow, .intro__text h2, .intro__body > *, .res > .eyebrow, .res > h2, .amen__text .eyebrow, .amen__text h2, .amen__text .lead, .amen__cols > div, .cita, .ubi h2, .contacto h2, .contacto__sub, .form .field, .form__actions, .footer__logo, .footer__info, .footer__legal, .hero__nav"],
     ["reveal reveal--soft", ".res__plano, .res__lista"],
     ["reveal-img", ".intro__img img, .amen__img img"],
     ["reveal-fade", ".ubi iframe"]
