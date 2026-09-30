@@ -6,6 +6,23 @@
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
 
+  /* ---------- Header: tema del logo según la sección debajo + velo al hacer scroll ---------- */
+  var header = $(".header"), temas = $$("[data-tema]").filter(function (n) { return n !== header; }), ticking = false;
+  function updateHeader() {
+    ticking = false;
+    var y = header.offsetHeight / 2, tema = "oscuro";
+    for (var i = 0; i < temas.length; i++) {
+      var r = temas[i].getBoundingClientRect();
+      if (r.top <= y && r.bottom > y) { tema = temas[i].getAttribute("data-tema"); break; }
+    }
+    if (header.getAttribute("data-tema") !== tema) header.setAttribute("data-tema", tema);
+    header.classList.toggle("is-scrolled", window.scrollY > 24);
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(updateHeader); } }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  updateHeader();
+
   /* ---------- Menú overlay ---------- */
   var menu = $("#menu"), burger = $(".burger"), closeBtn = $(".overlay__close");
   function menuFocusables() { return $$("a[href], button", menu); }

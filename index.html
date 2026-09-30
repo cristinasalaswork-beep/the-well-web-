@@ -16,13 +16,11 @@
 <body>
 <a class="skip" href="#contenido" data-i18n="skip">Saltar al contenido</a>
 
-<header class="header" id="inicio">
-  <div class="header__left">
-    <a class="pill" href="#contacto" data-i18n="header.contacto">Contáctanos</a>
-    <a class="header__tel" href="tel:+50763152222">+507 6315-2222</a>
-  </div>
+<header class="header" id="inicio" data-tema="oscuro">
+  <span></span>
   <a class="header__logo" href="#inicio" aria-label="The Well Panamá, inicio">
-    <img src="assets/img/logo-negro-horizontal.webp" width="720" height="152" alt="The Well Panamá">
+    <img class="logo-blanco" src="assets/img/logo-blanco-horizontal.webp" width="720" height="152" alt="The Well Panamá">
+    <img class="logo-negro" src="assets/img/logo-negro-horizontal.webp" width="720" height="152" alt="" aria-hidden="true">
   </a>
   <div class="header__right">
     <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
@@ -44,26 +42,25 @@
 <main id="contenido">
   <!-- 2. Hero -->
   <section class="hero" aria-labelledby="hero-titulo">
-    <div class="hero__media">
+    <div class="hero__media" data-tema="oscuro">
       <img class="bg" src="assets/img/hero-1600.webp"
            srcset="assets/img/hero-800.webp 800w, assets/img/hero-1600.webp 1600w, assets/img/hero-2400.webp 2400w"
            sizes="100vw" width="2400" height="1357" alt="Fachada de The Well Panamá vista desde abajo al atardecer" fetchpriority="high">
       <div class="hero__content">
-        <img class="hero__logo" src="assets/img/logo-blanco-vertical.webp" width="440" height="351" alt="">
         <h1 id="hero-titulo"><span data-i18n="hero.titulo.a">Cada día es una fuente de</span> <em data-i18n="hero.titulo.b">longevidad</em></h1>
         <p class="hero__sub"><i data-i18n="hero.sub">A new way to live fully and well</i></p>
       </div>
     </div>
-    <nav class="hero__nav" aria-label="Accesos rápidos">
-      <a class="pill" href="#residencias" data-i18n="nav.residencias">Residencias</a>
-      <a class="pill" href="#amenidades" data-i18n="nav.amenidades">Amenidades</a>
-      <a class="pill" href="#the-well" data-i18n="nav.thewell">The Well</a>
-      <a class="pill" href="#ubicacion" data-i18n="nav.ubicacion">Ubicación</a>
+    <nav class="hero__nav" data-tema="claro" aria-label="Accesos rápidos">
+      <a href="#residencias" data-i18n="nav.residencias">Residencias</a>
+      <a href="#amenidades" data-i18n="nav.amenidades">Amenidades</a>
+      <a href="#the-well" data-i18n="nav.thewell">The Well</a>
+      <a href="#ubicacion" data-i18n="nav.ubicacion">Ubicación</a>
     </nav>
   </section>
 
   <!-- 3. Intro -->
-  <section class="intro" id="the-well" aria-labelledby="intro-titulo">
+  <section class="intro" data-tema="claro" id="the-well" aria-labelledby="intro-titulo">
     <div class="intro__text">
       <div>
         <p class="eyebrow" data-i18n="intro.eyebrow">The Well</p>
@@ -82,7 +79,7 @@
   </section>
 
   <!-- 4. Residencias: selector -->
-  <section class="res" id="residencias" aria-labelledby="res-titulo">
+  <section class="res" data-tema="oscuro" id="residencias" aria-labelledby="res-titulo">
     <p class="eyebrow" data-i18n="res.eyebrow">Las residencias</p>
     <h2 id="res-titulo"><span data-i18n="res.titulo.a">Explora las</span> <em data-i18n="res.titulo.b">residencias</em></h2>
     <div class="res__grid">
@@ -126,8 +123,8 @@
         <div class="res__detalle">
           <p class="res__desc" id="res-desc" aria-live="polite"></p>
           <div class="res__btns">
-            <span class="pill" id="res-pill-tipo" aria-hidden="true"></span>
-            <a class="pill" id="res-contacto" href="#contacto" data-i18n="res.contacto">Contáctanos</a>
+            <span class="cta" id="res-pill-tipo" aria-hidden="true"></span>
+            <a class="cta" id="res-contacto" href="#contacto" data-i18n="res.contacto">Contáctanos</a>
           </div>
           <p class="res__nota" data-i18n="res.nota">Esquema referencial. Las distribuciones finales pueden variar.</p>
         </div>
@@ -137,7 +134,7 @@
   </section>
 
   <!-- 5. Amenidades -->
-  <section class="amen" id="amenidades" aria-labelledby="amen-titulo">
+  <section class="amen" data-tema="claro" id="amenidades" aria-labelledby="amen-titulo">
     <div class="amen__text">
       <p class="eyebrow" data-i18n="amen.eyebrow">Las amenidades</p>
       <h2 id="amen-titulo"><span data-i18n="amen.titulo.a">Diseñando el arte de</span> <em data-i18n="amen.titulo.b">vivir</em> <span data-i18n="amen.titulo.c">plenamente</span></h2>
@@ -154,16 +151,12 @@
   </section>
 
   <!-- 6. Cita -->
-  <section class="cita-band" aria-label="Filosofía">
+  <section class="cita-band" data-tema="oscuro" aria-label="Filosofía">
     <p class="cita" data-i18n="cita">Vive a plenitud gracias a amenidades exclusivas, tecnología para la salud y espacios diseñados para tu bienestar diario.</p>
   </section>
 
   <!-- 7. Ubicación -->
-  <section class="ubi" id="ubicacion" aria-labelledby="ubi-titulo">
-    <div class="ubi__img">
-      <img src="assets/img/ubicacion-podio-1600.webp" srcset="assets/img/ubicacion-podio-800.webp 800w, assets/img/ubicacion-podio-1600.webp 1600w, assets/img/ubicacion-podio-2400.webp 2400w"
-           sizes="(max-width: 960px) 100vw, 49vw" width="2400" height="1357" loading="lazy" alt="Podio y fuente de The Well Panamá">
-    </div>
+  <section class="ubi" data-tema="claro" id="ubicacion" aria-labelledby="ubi-titulo">
     <div class="ubi__text">
       <p class="eyebrow" data-i18n="ubi.eyebrow">Ubicación</p>
       <h2 id="ubi-titulo"><span data-i18n="ubi.titulo.a">En el corazón de</span> <em data-i18n="ubi.titulo.b">Obarrio</em></h2>
@@ -181,10 +174,18 @@
         <p data-i18n="ubi.inv.p">Una de las zonas más consolidadas y con mayor plusvalía de la Ciudad de Panamá, con una propuesta de amenidades sin comparación en la zona y sólido potencial de rentabilidad y revalorización.</p>
       </div>
     </div>
+    <div class="ubi__mapa">
+      <div class="ubi__marco">
+        <iframe title="Mapa de la ubicación de The Well Panamá, Obarrio, Ciudad de Panamá"
+                src="https://maps.google.com/maps?q=8.985361,-79.519444&amp;z=16&amp;hl=es&amp;output=embed"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <a class="cta" href="https://www.google.com/maps?q=8.985361,-79.519444" target="_blank" rel="noopener" data-i18n="ubi.mapa">Abrir en Google Maps</a>
+    </div>
   </section>
 
   <!-- 8. Formulario -->
-  <section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
+  <section class="contacto" data-tema="oscuro" id="contacto" aria-labelledby="contacto-titulo">
     <h2 id="contacto-titulo"><span data-i18n="form.titulo.a">Bienvenido a tu</span> <em data-i18n="form.titulo.b">nuevo hogar</em></h2>
     <p class="eyebrow contacto__sub" data-i18n="form.sub">Déjanos tus datos y te contactaremos</p>
     <form class="form" id="form" novalidate>
@@ -197,7 +198,7 @@
       <div class="field field--wide"><label for="f-contacto" data-i18n="form.contacto">Preferencia de contacto *</label><select id="f-contacto" name="preferencia" required></select><span class="err" data-i18n="form.err.sel">Selecciona una opción</span></div>
       <div class="field field--wide"><label for="f-origen" data-i18n="form.origen">¿Cómo nos conociste? *</label><select id="f-origen" name="origen" required></select><span class="err" data-i18n="form.err.sel">Selecciona una opción</span></div>
       <div class="form__actions">
-        <button class="pill" type="submit" data-i18n="form.enviar">Enviar</button>
+        <button class="cta" type="submit" data-i18n="form.enviar">Enviar</button>
         <p class="form__msg" id="form-msg" role="status" aria-live="polite"></p>
         <a class="form__alt cta" id="form-wa" href="https://wa.me/50763152222" data-i18n="form.wa">O escríbenos por WhatsApp</a>
       </div>
@@ -206,7 +207,7 @@
 </main>
 
 <!-- 9. Footer -->
-<footer class="footer">
+<footer class="footer" data-tema="claro">
   <img class="footer__logo" src="assets/img/logo-negro-vertical.webp" width="440" height="351" loading="lazy" alt="The Well Panamá">
   <address class="footer__info" style="font-style: normal">
     <span data-i18n="footer.dir">Calle 56 y Calle 57, Obarrio, entre Av. Ricardo Arango y Calle 50</span>

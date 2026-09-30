@@ -53,13 +53,12 @@ R = SRC("renders:")
 hero = Image.open(f"{R}/hero-fachada-torre.png.png").convert("RGB")
 save_set(hero, "hero", [800, 1600, 2400])
 save_set(Image.open(f"{R}/pool.png").convert("RGB"), "amenidades-pool", [800, 1600, 2400])
-save_set(Image.open(f"{R}/podio-fuente.png").convert("RGB"), "ubicacion-podio", [800, 1600, 2400])
 # Recorte cerrado de la torre (sin edificios vecinos), 4:5
 torre = Image.open(f"{R}/torre-completa.png").convert("RGB").crop((690, 30, 1830, 1455))
 save_set(torre, "intro-torre", [600, 900, 1140])
 
 # ---------- Logos: WebP con alfa, recortados al contenido ----------
-for n in ["blanco-horizontal", "negro-horizontal", "blanco-vertical", "negro-vertical", "stone-horizontal", "stone-vertical"]:
+for n in ["blanco-horizontal", "negro-horizontal", "negro-vertical"]:  # podio-fuente ya no se usa; logos vertical blanco / stone tampoco
     im = Image.open(SRC("logos:", f"logo-{n}.png")).convert("RGBA")
     bbox = im.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
     im = im.crop(bbox)
