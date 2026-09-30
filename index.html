@@ -6,8 +6,14 @@
   <title>The Well Panamá · Residencias de wellness y longevidad en Obarrio</title>
   <meta name="description" content="The Well Panamá: residencias de lifestyle, longevidad y bienestar en Obarrio, Ciudad de Panamá. Essence Tower y Forest Tower.">
   <meta name="theme-color" content="#E1DFD8">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Well Panamá · Residencias de wellness y longevidad en Obarrio">
+  <meta property="og:description" content="Lifestyle, longevidad y bienestar en Obarrio, Ciudad de Panamá.">
+  <meta property="og:locale" content="es_PA">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/benton-light.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/notoserifjp-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/notoserifjp-light.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" type="image/webp" href="assets/img/hero-1600.webp" imagesrcset="assets/img/hero-800.webp 800w, assets/img/hero-1600.webp 1600w, assets/img/hero-2400.webp 2400w" imagesizes="100vw" fetchpriority="high">
   <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="css/fonts.css">
@@ -19,8 +25,8 @@
 
 <header class="header" id="inicio" data-tema="oscuro">
   <span></span>
-  <a class="header__logo" href="#inicio" aria-label="The Well Panamá, inicio">
-    <img class="logo-blanco" src="assets/img/logo-blanco-horizontal.webp" width="720" height="152" alt="The Well Panamá">
+  <a class="header__logo" href="#inicio" aria-label="The Well Panamá, inicio" data-i18n-attr="aria-label:a.logo">
+    <img class="logo-blanco" src="assets/img/logo-blanco-horizontal.webp" width="720" height="152" alt="The Well Panamá" data-i18n-attr="alt:a.logoalt">
     <img class="logo-negro" src="assets/img/logo-negro-horizontal.webp" width="720" height="152" alt="" aria-hidden="true">
   </a>
   <div class="header__right">
@@ -28,16 +34,17 @@
   </div>
 </header>
 
-<div class="overlay" id="menu" role="dialog" aria-modal="true" aria-label="Menú" aria-hidden="true" inert>
-  <div class="overlay__top"><button class="overlay__close" type="button">Cerrar</button></div>
-  <nav class="overlay__nav" aria-label="Secciones">
+<div class="overlay" id="menu" role="dialog" aria-modal="true" aria-label="Menú" data-i18n-attr="aria-label:a.menu" aria-hidden="true" inert>
+  <div class="overlay__top"><button class="overlay__close" type="button" data-i18n="menu.cerrar">Cerrar</button></div>
+  <nav class="overlay__nav" aria-label="Secciones" data-i18n-attr="aria-label:a.secciones">
     <a href="#the-well" data-i18n="nav.thewell">The Well</a>
     <a href="#residencias" data-i18n="nav.residencias">Residencias</a>
     <a href="#amenidades" data-i18n="nav.amenidades">Amenidades</a>
     <a href="#ubicacion" data-i18n="nav.ubicacion">Ubicación</a>
     <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
   </nav>
-  <p class="overlay__foot"><a href="tel:+50763152222">+507 6315-2222</a></p>
+  <p class="overlay__foot"><a class="ul" href="tel:+50763152222">+507 6315-2222</a></p>
+  <div class="lang" role="group" aria-label="Idioma" data-i18n-attr="aria-label:a.lang"><button type="button" class="ul" data-lang="es">ES</button><span aria-hidden="true">/</span><button type="button" class="ul" data-lang="en">EN</button></div>
 </div>
 
 <main id="contenido">
@@ -46,13 +53,13 @@
     <div class="hero__media" data-tema="oscuro">
       <img class="bg" src="assets/img/hero-1600.webp"
            srcset="assets/img/hero-800.webp 800w, assets/img/hero-1600.webp 1600w, assets/img/hero-2400.webp 2400w"
-           sizes="100vw" width="2400" height="1357" alt="Fachada de The Well Panamá vista desde abajo al atardecer" fetchpriority="high">
+           sizes="100vw" width="2400" height="1357" alt="Fachada de The Well Panamá vista desde abajo al atardecer" data-i18n-attr="alt:a.heroalt" fetchpriority="high">
       <div class="hero__content">
         <h1 id="hero-titulo"><span data-i18n="hero.titulo.a">Cada día es una fuente de</span> <em data-i18n="hero.titulo.b">longevidad</em></h1>
         <p class="hero__sub"><i data-i18n="hero.sub">A new way to live fully and well</i></p>
       </div>
     </div>
-    <nav class="hero__nav" data-tema="claro" aria-label="Accesos rápidos">
+    <nav class="hero__nav" data-tema="claro" aria-label="Accesos rápidos" data-i18n-attr="aria-label:a.acceso">
       <a href="#residencias"><span class="ul" data-i18n="nav.residencias">Residencias</span></a>
       <a href="#amenidades"><span class="ul" data-i18n="nav.amenidades">Amenidades</span></a>
       <a href="#the-well"><span class="ul" data-i18n="nav.thewell">The Well</span></a>
@@ -75,7 +82,7 @@
     </div>
     <div class="intro__img">
       <img src="assets/img/intro-torre-900.webp" srcset="assets/img/intro-torre-600.webp 600w, assets/img/intro-torre-900.webp 900w, assets/img/intro-torre-1140.webp 1140w"
-           sizes="(max-width: 860px) 100vw, 46vw" width="1140" height="1425" loading="lazy" alt="Torres de The Well Panamá al atardecer">
+           sizes="(max-width: 860px) 100vw, 46vw" width="1140" height="1425" loading="lazy" alt="Torres de The Well Panamá al atardecer" data-i18n-attr="alt:a.introalt">
     </div>
   </section>
 
@@ -85,7 +92,7 @@
     <h2 id="res-titulo"><span data-i18n="res.titulo.a">Explora las</span> <em data-i18n="res.titulo.b">residencias</em></h2>
     <div class="res__grid">
       <div class="res__plano">
-<svg class="plano" viewBox="240 150 1542 850" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Esquema referencial de la planta tipo, pisos 12 al 26: Essence Tower y Forest Tower">
+<svg class="plano" viewBox="240 150 1542 850" xmlns="http://www.w3.org/2000/svg" role="group" data-i18n-attr="aria-label:a.plano" aria-label="Esquema referencial de la planta tipo, pisos 12 al 26: Essence Tower y Forest Tower">
 <g class="torre" data-torre="essence">
 <text class="svg-torre" x="560" y="205" text-anchor="middle">Essence Tower</text>
 <g class="unidad" data-tipo="B" data-unidad="B" role="button" tabindex="0" aria-pressed="false" aria-label="Tipo B, unidad B, Essence Tower"><title>Tipo B (B) · Essence Tower</title><polygon points="388,298 574,298 574,432 402,432"/><text class="svg-letra" x="497" y="262" text-anchor="middle">B</text></g>
@@ -130,7 +137,7 @@
           <p class="res__nota" data-i18n="res.nota">Esquema referencial. Las distribuciones finales pueden variar.</p>
         </div>
       </div>
-      <ol class="res__lista" id="res-lista" aria-label="Tipos de residencia"></ol>
+      <ol class="res__lista" id="res-lista" aria-label="Tipos de residencia" data-i18n-attr="aria-label:a.tipos"></ol>
     </div>
   </section>
 
@@ -147,19 +154,19 @@
     </div>
     <div class="amen__img">
       <img src="assets/img/amenidades-pool-1600.webp" srcset="assets/img/amenidades-pool-800.webp 800w, assets/img/amenidades-pool-1600.webp 1600w, assets/img/amenidades-pool-2400.webp 2400w"
-           sizes="(max-width: 960px) 100vw, 48vw" width="2400" height="1357" loading="lazy" alt="Horizon Pool de The Well Panamá">
+           sizes="(max-width: 960px) 100vw, 48vw" width="2400" height="1357" loading="lazy" alt="Horizon Pool de The Well Panamá" data-i18n-attr="alt:a.poolalt">
     </div>
   </section>
 
   <!-- 6. Cita -->
-  <section class="cita-band" data-tema="oscuro" aria-label="Filosofía">
+  <section class="cita-band" data-tema="oscuro" aria-label="Filosofía" data-i18n-attr="aria-label:a.cita">
     <p class="cita" data-i18n="cita">Vive a plenitud gracias a amenidades exclusivas, tecnología para la salud y espacios diseñados para tu bienestar diario.</p>
   </section>
 
   <!-- 7. Ubicación -->
   <section class="ubi" data-tema="claro" id="ubicacion" aria-labelledby="ubi-titulo">
     <h2 id="ubi-titulo"><span data-i18n="ubi.titulo.a">Ubicado en el corazón de</span> <em data-i18n="ubi.titulo.b">Obarrio</em></h2>
-    <iframe title="Mapa de la ubicación de The Well Panamá, Obarrio, Ciudad de Panamá"
+    <iframe data-i18n-attr="title:a.iframe" title="Mapa de la ubicación de The Well Panamá, Obarrio, Ciudad de Panamá"
             src="https://maps.google.com/maps?q=8.985361,-79.519444&amp;z=16&amp;hl=es&amp;output=embed"
             loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
   </section>
@@ -169,14 +176,15 @@
     <h2 id="contacto-titulo"><span data-i18n="form.titulo.a">Bienvenido a tu</span> <em data-i18n="form.titulo.b">nuevo hogar</em></h2>
     <p class="eyebrow contacto__sub" data-i18n="form.sub">Déjanos tus datos y te contactaremos</p>
     <form class="form" id="form" novalidate>
-      <div class="field"><label for="f-nombre" data-i18n="form.nombre">Nombre *</label><input id="f-nombre" name="nombre" autocomplete="given-name" required><span class="err" data-i18n="form.err.req">Campo obligatorio</span></div>
-      <div class="field"><label for="f-apellido" data-i18n="form.apellido">Apellido *</label><input id="f-apellido" name="apellido" autocomplete="family-name" required><span class="err" data-i18n="form.err.req">Campo obligatorio</span></div>
-      <div class="field"><label for="f-correo" data-i18n="form.correo">Correo electrónico *</label><input id="f-correo" name="correo" type="email" autocomplete="email" required><span class="err" data-i18n="form.err.correo">Ingresa un correo válido</span></div>
-      <div class="field"><label for="f-tel" data-i18n="form.tel">Teléfono *</label><input id="f-tel" name="telefono" type="tel" autocomplete="tel" required><span class="err" data-i18n="form.err.tel">Ingresa un teléfono válido</span></div>
-      <div class="field"><label for="f-pais" data-i18n="form.pais">País *</label><select id="f-pais" name="pais" autocomplete="country-name" required></select><span class="err" data-i18n="form.err.sel">Selecciona una opción</span></div>
-      <div class="field"><label for="f-tipo" data-i18n="form.tipo">Tipo de residencia deseado *</label><select id="f-tipo" name="tipo" required></select><span class="err" data-i18n="form.err.sel">Selecciona una opción</span></div>
-      <div class="field field--wide"><label for="f-contacto" data-i18n="form.contacto">Preferencia de contacto *</label><select id="f-contacto" name="preferencia" required></select><span class="err" data-i18n="form.err.sel">Selecciona una opción</span></div>
-      <div class="field field--wide"><label for="f-origen" data-i18n="form.origen">¿Cómo nos conociste? *</label><select id="f-origen" name="origen" required></select><span class="err" data-i18n="form.err.sel">Selecciona una opción</span></div>
+      <div class="field"><label for="f-nombre" data-i18n="form.nombre">Nombre *</label><input id="f-nombre" name="nombre" autocomplete="given-name" required aria-describedby="f-nombre-err"><span class="err" id="f-nombre-err" data-i18n="form.err.req">Campo obligatorio</span></div>
+      <div class="field"><label for="f-apellido" data-i18n="form.apellido">Apellido *</label><input id="f-apellido" name="apellido" autocomplete="family-name" required aria-describedby="f-apellido-err"><span class="err" id="f-apellido-err" data-i18n="form.err.req">Campo obligatorio</span></div>
+      <div class="field"><label for="f-correo" data-i18n="form.correo">Correo electrónico *</label><input id="f-correo" name="correo" type="email" autocomplete="email" required aria-describedby="f-correo-err"><span class="err" id="f-correo-err" data-i18n="form.err.correo">Ingresa un correo válido</span></div>
+      <div class="field"><label for="f-tel" data-i18n="form.tel">Teléfono *</label><input id="f-tel" name="telefono" type="tel" autocomplete="tel" required aria-describedby="f-tel-err"><span class="err" id="f-tel-err" data-i18n="form.err.tel">Ingresa un teléfono válido</span></div>
+      <div class="field"><label for="f-pais" data-i18n="form.pais">País *</label><select id="f-pais" name="pais" autocomplete="country-name" required aria-describedby="f-pais-err"></select><span class="err" id="f-pais-err" data-i18n="form.err.sel">Selecciona una opción</span></div>
+      <div class="field"><label for="f-tipo" data-i18n="form.tipo">Tipo de residencia deseado *</label><select id="f-tipo" name="tipo" required aria-describedby="f-tipo-err"></select><span class="err" id="f-tipo-err" data-i18n="form.err.sel">Selecciona una opción</span></div>
+      <div class="field field--wide"><label for="f-contacto" data-i18n="form.contacto">Preferencia de contacto *</label><select id="f-contacto" name="preferencia" required aria-describedby="f-contacto-err"></select><span class="err" id="f-contacto-err" data-i18n="form.err.sel">Selecciona una opción</span></div>
+      <div class="field field--wide"><label for="f-origen" data-i18n="form.origen">¿Cómo nos conociste? *</label><select id="f-origen" name="origen" required aria-describedby="f-origen-err"></select><span class="err" id="f-origen-err" data-i18n="form.err.sel">Selecciona una opción</span></div>
+      <div class="field--trap" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
       <div class="form__actions">
         <button class="cta" type="submit" data-i18n="form.enviar">Enviar</button>
         <p class="form__msg" id="form-msg" role="status" aria-live="polite"></p>
@@ -188,12 +196,13 @@
 
 <!-- 9. Footer -->
 <footer class="footer" data-tema="claro">
-  <img class="footer__logo" src="assets/img/logo-negro-vertical.webp" width="440" height="351" loading="lazy" alt="The Well Panamá">
+  <img class="footer__logo" src="assets/img/logo-negro-vertical.webp" width="440" height="351" loading="lazy" alt="The Well Panamá" data-i18n-attr="alt:a.logoalt">
   <address class="footer__info" style="font-style: normal">
     <span data-i18n="footer.dir">Calle 56 y Calle 57, Obarrio, entre Av. Ricardo Arango y Calle 50</span>
     <span><a class="ul" href="tel:+50763152222">+507 6315-2222</a> / <a class="ul" href="tel:+5073855555">+507 385-5555</a></span>
     <a class="ul" href="https://www.instagram.com/thewellpanama" rel="noopener" target="_blank">@thewellpanama</a>
   </address>
+  <div class="lang" role="group" aria-label="Idioma" data-i18n-attr="aria-label:a.lang"><button type="button" class="ul" data-lang="es">ES</button><span aria-hidden="true">/</span><button type="button" class="ul" data-lang="en">EN</button></div>
   <!-- [PENDIENTE] Logos de desarrolladores: añadir aquí (se oculta mientras esté vacío). -->
   <div class="footer__devs"></div>
   <p class="footer__legal" data-i18n="footer.legal">Las imágenes, renders, metrajes, materiales, acabados y propuestas mostradas son ilustrativos y referenciales. El proyecto final podrá presentar variaciones y mejoras en sus acabados, concepto y arquitectura.</p>

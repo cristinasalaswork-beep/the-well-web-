@@ -250,3 +250,12 @@ a:hover > .ul, a:focus-visible > .ul, a.ul:hover, a.ul:focus-visible { backgroun
   .res__item.is-on .res__datos { animation: none; }
   .cta, .ul, .overlay__nav a { transition: none; }
 }
+
+/* ---------- Fase 3: idioma, foco, honeypot ---------- */
+.lang { display: flex; justify-content: center; align-items: center; gap: .9em; font-family: var(--f-ui); font-size: var(--fs-ui); letter-spacing: var(--tracking); }
+.lang button { font: inherit; letter-spacing: inherit; padding: .5em .2em; }
+.lang button[aria-pressed="true"] { background-size: 100% 1px; }
+.footer .lang { margin-top: 28px; }
+.overlay .lang { padding-bottom: 1.2rem; }
+.field--trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+[data-tema="oscuro"] :focus-visible, .overlay :focus-visible, .contacto :focus-visible { outline-color: var(--hueso); }

@@ -5,6 +5,9 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var lang = "es";
+  function T() { return W.t[lang]; }
 
   /* ---------- Header: tema del logo según la sección debajo + velo al hacer scroll ---------- */
   var header = $(".header"), temas = $$("[data-tema]").filter(function (n) { return n !== header; }), ticking = false;
@@ -25,19 +28,18 @@
 
   /* ---------- Menú overlay ---------- */
   var menu = $("#menu"), burger = $(".burger"), closeBtn = $(".overlay__close");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   $$(".overlay__nav a", menu).forEach(function (a, i) { a.style.setProperty("--i", i); });
   function isOpen() { return menu.classList.contains("is-open"); }
-  function menuFocusables() { return $$("a[href], button", menu); }
   function openMenu() {
     menu.removeAttribute("inert"); menu.setAttribute("aria-hidden", "false");
     void menu.offsetWidth; menu.classList.add("is-open");
-    burger.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; closeBtn.focus();
+    burger.setAttribute("aria-expanded", "true"); burger.setAttribute("aria-label", T().menuCerrar);
+    document.body.style.overflow = "hidden"; closeBtn.focus();
   }
   function closeMenu(restore) {
     menu.classList.remove("is-open"); menu.setAttribute("inert", ""); menu.setAttribute("aria-hidden", "true");
-    burger.setAttribute("aria-expanded", "false"); document.body.style.overflow = "";
-    if (restore !== false) burger.focus();
+    burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", T().menuAbrir);
+    document.body.style.overflow = ""; if (restore !== false) burger.focus();
   }
   burger.addEventListener("click", openMenu);
   closeBtn.addEventListener("click", function () { closeMenu(); });
@@ -46,13 +48,38 @@
     if (!isOpen()) return;
     if (e.key === "Escape") { closeMenu(); return; }
     if (e.key === "Tab") {
-      var f = menuFocusables(), first = f[0], last = f[f.length - 1];
+      var f = $$("a[href], button", menu), first = f[0], last = f[f.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }
   });
 
-  /* ---------- Amenidades ---------- */
+  /* ---------- Idioma (ES / EN) ---------- */
+  // El español vive en el HTML: se guarda al inicio para poder restaurarlo.
+  var i18nEls = $$("[data-i18n]").map(function (n) { return { n: n, key: n.getAttribute("data-i18n"), es: n.innerHTML }; });
+  var attrEls = [];
+  $$("[data-i18n-attr]").forEach(function (n) {
+    n.getAttribute("data-i18n-attr").split(";").forEach(function (pair) {
+      var p = pair.split(":"); attrEls.push({ n: n, attr: p[0], key: p[1], es: n.getAttribute(p[0]) });
+    });
+  });
+  var meta = { title: document.title, desc: $('meta[name="description"]').getAttribute("content") };
+
+  function applyStatic() {
+    var en = lang === "en";
+    i18nEls.forEach(function (o) { o.n.innerHTML = en && W.en[o.key] != null ? W.en[o.key] : o.es; });
+    attrEls.forEach(function (o) { o.n.setAttribute(o.attr, en && W.en[o.key] != null ? W.en[o.key] : o.es); });
+    document.title = en ? W.en["meta.title"] : meta.title;
+    $('meta[name="description"]').setAttribute("content", en ? W.en["meta.desc"] : meta.desc);
+    document.documentElement.lang = lang;
+    $$("[data-lang]").forEach(function (b) {
+      var on = b.getAttribute("data-lang") === lang;
+      b.setAttribute("aria-pressed", on); if (on) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current");
+    });
+    burger.setAttribute("aria-label", isOpen() ? T().menuCerrar : T().menuAbrir);
+  }
+
+  /* ---------- Amenidades (los nombres ya están en inglés) ---------- */
   ["wellness", "enjoyment"].forEach(function (k) {
     var ol = $("#amen-" + k);
     W.amenidades[k].forEach(function (a, i) {
@@ -66,25 +93,47 @@
 
   /* ---------- Selector de residencias ---------- */
   var lista = $("#res-lista"), desc = $("#res-desc"), pillTipo = $("#res-pill-tipo");
-  var items = {}, current = null;
+  var items = {}, current = "A", firstSelect = true, swapTimer = null;
 
-  W.residencias.forEach(function (r, i) {
-    var li = el("li", "res__item");
-    var btn = el("button"); btn.type = "button"; btn.setAttribute("aria-pressed", "false");
-    btn.appendChild(el("span", "res__num", pad(i + 1)));
-    btn.appendChild(el("span", "res__tipo", r.nombre));
-    var datos = el("div", "res__datos"), dl = el("dl");
-    function row(t, v) { dl.appendChild(el("dt", null, t)); dl.appendChild(el("dd", null, v)); }
-    row("Superficie", r.m2 + " m² / " + r.sqft + " sq ft");
-    row("Distribución", r.distribucion);
-    if (r.vista) row("Vista", r.vista);
-    datos.appendChild(dl);
-    li.appendChild(btn); li.appendChild(datos); lista.appendChild(li);
-    btn.addEventListener("click", function () { select(r.tipo); });
-    items[r.tipo] = { li: li, btn: btn, data: r };
-  });
-
-  function select(tipo) {
+  function nombre(r) { return T().tipo + " " + r.tipo; }
+  function vista(r) { return r.vista ? T().vistas[r.vista] : null; }
+  function renderLista() {
+    lista.innerHTML = ""; items = {};
+    W.residencias.forEach(function (r, i) {
+      var li = el("li", "res__item");
+      var btn = el("button"); btn.type = "button"; btn.setAttribute("aria-pressed", "false");
+      btn.appendChild(el("span", "res__num", pad(i + 1)));
+      btn.appendChild(el("span", "res__tipo", nombre(r)));
+      var datos = el("div", "res__datos"), dl = el("dl");
+      function row(t, v) { dl.appendChild(el("dt", null, t)); dl.appendChild(el("dd", null, v)); }
+      row(T().superficie, r.m2 + " m² / " + r.sqft + " sq ft");
+      row(T().distribucion, T().dist);
+      if (vista(r)) row(T().vista, vista(r));
+      datos.appendChild(dl);
+      li.appendChild(btn); li.appendChild(datos); lista.appendChild(li);
+      btn.addEventListener("click", function () { select(r.tipo); });
+      items[r.tipo] = { li: li, btn: btn, data: r };
+    });
+    $$(".plano .unidad").forEach(function (u) {
+      var r = items[u.getAttribute("data-tipo")].data, L = u.getAttribute("data-unidad");
+      var torre = u.closest(".torre").getAttribute("data-torre") === "essence" ? "Essence Tower" : "Forest Tower";
+      u.setAttribute("aria-label", nombre(r) + ", " + T().unidad + " " + L + ", " + torre);
+      $("title", u).textContent = nombre(r) + " (" + L + ") · " + torre;
+    });
+  }
+  function describe(r) {
+    var txt = nombre(r) + ": " + r.m2 + " m² (" + r.sqft + " sq ft), " + T().dist + ".";
+    if (vista(r)) txt += " " + T().vista + ": " + vista(r) + ".";
+    return txt + " " + T().apoyo;
+  }
+  function swapText(pairs, instant) {
+    function apply() { pairs.forEach(function (p) { p[0].textContent = p[1]; p[0].classList.remove("is-out"); }); }
+    if (instant || firstSelect || reduce) { firstSelect = false; apply(); return; }
+    clearTimeout(swapTimer);
+    pairs.forEach(function (p) { p[0].classList.add("swap", "is-out"); });
+    swapTimer = setTimeout(apply, 280);
+  }
+  function select(tipo, instant) {
     if (!items[tipo]) return;
     current = tipo;
     Object.keys(items).forEach(function (k) {
@@ -97,79 +146,82 @@
       u.classList.toggle("is-on", on); u.setAttribute("aria-pressed", on);
     });
     var r = items[tipo].data;
-    var txt = r.nombre + ": " + r.m2 + " m² (" + r.sqft + " sq ft), " + r.distribucion + ".";
-    if (r.vista) txt += " Vista: " + r.vista + ".";
-    txt += " " + W.residenciasApoyo;
-    swapText([[desc, txt], [pillTipo, r.nombre]]);
+    swapText([[desc, describe(r)], [pillTipo, nombre(r)]], instant);
   }
-  var swapTimer = null, firstSelect = true;
-  function swapText(pairs) {
-    function apply() { pairs.forEach(function (p) { p[0].textContent = p[1]; p[0].classList.remove("is-out"); }); }
-    if (firstSelect || reduce) { firstSelect = false; apply(); return; }
-    clearTimeout(swapTimer);
-    pairs.forEach(function (p) { p[0].classList.add("swap", "is-out"); });
-    swapTimer = setTimeout(apply, 280);
-  }
-
   $$(".plano .unidad").forEach(function (u) {
     u.addEventListener("click", function () { select(u.getAttribute("data-tipo")); });
     u.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); select(u.getAttribute("data-tipo")); }
     });
   });
-  select("A");
 
   /* ---------- Formulario ---------- */
-  var F = W.formulario;
-  function fill(id, placeholder, opts) {
-    var s = $(id); s.appendChild(new Option(placeholder, ""));
+  var form = $("#form"), msg = $("#form-msg"), wa = $("#form-wa");
+  function fill(id, opts, keep) {
+    var s = $(id), prev = s.value; s.innerHTML = "";
+    s.appendChild(new Option(T().selecciona, ""));
     opts.forEach(function (o) { s.appendChild(new Option(o, o)); });
+    if (keep && prev) s.selectedIndex = keep.indexOf(prev) + 1;
   }
-  fill("#f-pais", "Selecciona", F.paises);
-  fill("#f-tipo", "Selecciona", W.residencias.map(function (r) { return r.nombre; }).concat(["Penthouse", "Aún no lo sé"]));
-  fill("#f-contacto", "Selecciona", F.contacto);
-  fill("#f-origen", "Selecciona", F.origen);
-
+  function fillSelects() {
+    var tipos = W.residencias.map(nombre).concat(T().extraTipos);
+    // conserva la selección por posición al cambiar de idioma
+    var idx = {};
+    ["#f-pais", "#f-tipo", "#f-contacto", "#f-origen"].forEach(function (id) { idx[id] = $(id).selectedIndex; });
+    fill("#f-pais", T().paises); fill("#f-tipo", tipos); fill("#f-contacto", T().contacto); fill("#f-origen", T().origen);
+    Object.keys(idx).forEach(function (id) { if (idx[id] > 0) $(id).selectedIndex = idx[id]; });
+  }
   $("#res-contacto").addEventListener("click", function () {
-    if (current) $("#f-tipo").value = items[current].data.nombre;
+    if (current) $("#f-tipo").value = nombre(items[current].data);
   });
 
-  var form = $("#form"), msg = $("#form-msg"), wa = $("#form-wa");
   var rules = {
     correo: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); },
     telefono: function (v) { return /^\+?[\d\s().-]{7,}$/.test(v); }
   };
+  function fields() { return $$("input:not([name=website]), select", form); }
   function validate(input) {
     var v = input.value.trim(), ok = v !== "" && (!rules[input.name] || rules[input.name](v));
     input.closest(".field").classList.toggle("has-error", !ok);
     input.setAttribute("aria-invalid", !ok);
     return ok;
   }
-  $$("input, select", form).forEach(function (i) {
+  fields().forEach(function (i) {
     i.addEventListener("blur", function () { if (i.value !== "") validate(i); });
     i.addEventListener("input", function () { if (i.closest(".field").classList.contains("has-error")) validate(i); });
   });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var fields = $$("input, select", form), bad = fields.filter(function (i) { return !validate(i); });
-    if (bad.length) { msg.textContent = "Revisa los campos marcados."; bad[0].focus(); return; }
+    var bad = fields().filter(function (i) { return !validate(i); });
+    if (bad.length) { msg.textContent = T().revisa; bad[0].focus(); return; }
+    if ($("[name=website]", form).value) return; // trampa anti-bots
     var data = {};
-    fields.forEach(function (i) { data[i.name] = i.value.trim(); });
-    if (W.config.formAction) {
-      msg.textContent = "Enviando…";
-      fetch(W.config.formAction, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); msg.textContent = "Gracias. Te contactaremos muy pronto."; form.reset(); })
-        .catch(function () { msg.textContent = "No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp."; });
+    fields().forEach(function (i) { data[i.name] = i.value.trim(); });
+    var cfg = W.config;
+    if (cfg.formMode === "endpoint" && cfg.formAction) {
+      data.idioma = lang;
+      msg.textContent = T().enviando;
+      fetch(cfg.formAction, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); msg.textContent = T().ok; form.reset(); fillSelects(); })
+        .catch(function () { msg.textContent = T().error; });
     } else {
-      // [PENDIENTE] Sin destino configurado: no se envía a ningún servidor; se ofrece WhatsApp con los datos.
-      var t = "Hola, soy " + data.nombre + " " + data.apellido + ". Me interesa " + data.tipo + " en The Well Panamá. " +
-              "Contacto: " + data.correo + ", " + data.telefono + " (" + data.preferencia + "). País: " + data.pais + ". Nos conocí por: " + data.origen + ".";
-      wa.href = W.config.whatsapp + "?text=" + encodeURIComponent(t);
-      msg.textContent = "Tus datos están listos. Para enviarlos, continúa por WhatsApp.";
-      wa.focus();
+      var url = cfg.whatsapp + "?text=" + encodeURIComponent(T().waTexto(data));
+      wa.href = url;
+      window.open(url, "_blank", "noopener");
+      msg.textContent = T().waAbierto;
     }
   });
+
+  /* ---------- Idioma: aplicar y recordar ---------- */
+  function setLang(l, persist) {
+    lang = l;
+    if (persist) { try { localStorage.setItem("well-lang", l); } catch (e) { /* sin almacenamiento */ } }
+    applyStatic(); renderLista(); fillSelects(); select(current, true);
+  }
+  $$("[data-lang]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.getAttribute("data-lang"), true); }); });
+  var stored = null; try { stored = localStorage.getItem("well-lang"); } catch (e) { /* ignorar */ }
+  setLang(stored === "en" ? "en" : "es", false);
 
   /* ---------- Movimiento: hero y revelado al scroll ---------- */
   var hero = $(".hero"), heroImg = $(".hero__media img.bg");

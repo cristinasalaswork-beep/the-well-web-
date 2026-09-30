@@ -67,3 +67,14 @@ for n in ["blanco-horizontal", "negro-horizontal", "negro-vertical"]:  # podio-f
     p = f"{OUT}/img/logo-{n}.webp"
     im.save(p, "WEBP", quality=92, method=6)
     print("logo", n, im.size, os.path.getsize(p) // 1024, "KB")
+
+# ---------- Favicon: solo el símbolo (gota) del logo negro ----------
+sym = Image.open(SRC("logos:", "logo-negro-horizontal.png")).convert("RGBA").crop((150, 120, 600, 730))
+bb = sym.getchannel("A").point(lambda a: 255 if a > 8 else 0).getbbox()
+sym = sym.crop(bb)
+def square(im, size, bg=None, pad=0.14):
+    s = max(im.size); canvas = Image.new("RGBA", (round(s / (1 - 2 * pad)),) * 2, bg or (0, 0, 0, 0))
+    canvas.alpha_composite(im, ((canvas.width - im.width) // 2, (canvas.height - im.height) // 2))
+    return canvas.resize((size, size), Image.LANCZOS)
+square(sym, 64).save(f"{OUT}/favicon.png", optimize=True)
+square(sym, 180, bg=(225, 223, 216, 255)).convert("RGB").save(f"{OUT}/apple-touch-icon.png", optimize=True)
