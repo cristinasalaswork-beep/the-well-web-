@@ -159,6 +159,7 @@ a.cta:hover, button.cta:hover { text-decoration-thickness: 2px; }
 
 /* ---------- Ubicación ---------- */
 .ubi { background: var(--hueso-claro); padding: var(--sec-y) var(--gutter); }
+.ubi h2 { margin-bottom: clamp(28px, 4vw, 56px); }
 .ubi iframe { display: block; width: 100%; aspect-ratio: 21 / 9; border: 0; filter: grayscale(1) sepia(.15) contrast(.95); }
 @media (max-width: 720px) { .ubi iframe { aspect-ratio: 4 / 5; } }
 
